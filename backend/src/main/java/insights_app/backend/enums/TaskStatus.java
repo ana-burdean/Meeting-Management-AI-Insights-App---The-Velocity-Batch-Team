@@ -1,4 +1,4 @@
-package com.yourname.insights_app.enums;
+package insights_app.backend.enums;
 
 public enum TaskStatus {
     PENDING,

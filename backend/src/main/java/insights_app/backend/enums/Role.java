@@ -1,4 +1,4 @@
-com.insights_app.backend.com
+package insights_app.backend.enums;
 
 public enum  Role{
     ADMIN,
