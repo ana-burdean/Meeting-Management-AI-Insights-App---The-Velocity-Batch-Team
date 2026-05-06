@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f21bd2a0-c799-4440-8df1-f9173124d1c3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AI_Meeting_Agent_Insights_App.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a8565869-168e-49b6-b0dc-b1c73e759a9e.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a8565869-168e-49b6-b0dc-b1c73e759a9e/storage_v2/_src_/database/meeting_insights_db.Xo9NIg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a8565869-168e-49b6-b0dc-b1c73e759a9e/storage_v2/_src_/database/meeting_insights_db.Xo9NIg/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a8565869-168e-49b6-b0dc-b1c73e759a9e/storage_v2/_src_/database/meeting_insights_db.Xo9NIg/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a8565869-168e-49b6-b0dc-b1c73e759a9e/storage_v2/_src_/database/meeting_insights_db.Xo9NIg/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/insights_app/backend/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/insights_app/backend/config/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/insights_app/backend/service/OllamaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/insights_app/backend/service/OllamaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +33,7 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.BackendApplication.executor": "Run",
     "git-widget-placeholder": "backend__ib",
@@ -85,7 +74,10 @@
       <option name="presentableId" value="Default" />
       <updated>1777671487070</updated>
       <workItem from="1777671488400" duration="63000" />
-      <workItem from="1777715725420" duration="1047000" />
+      <workItem from="1777715725420" duration="1738000" />
+      <workItem from="1778052472678" duration="163000" />
+      <workItem from="1778058231793" duration="201000" />
+      <workItem from="1778080848306" duration="6306000" />
     </task>
     <servers />
   </component>
