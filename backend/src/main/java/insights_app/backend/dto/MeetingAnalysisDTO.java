@@ -35,6 +35,7 @@ public class MeetingAnalysisDTO {
     public String getDetailedNotes() { return detailedNotes; }
     public void setDetailedNotes(String detailedNotes) { this.detailedNotes = detailedNotes; }
 
+
     public String getDecisionsMade() { return decisionsMade; }
     public void setDecisionsMade(String decisionsMade) { this.decisionsMade = decisionsMade; }
 
