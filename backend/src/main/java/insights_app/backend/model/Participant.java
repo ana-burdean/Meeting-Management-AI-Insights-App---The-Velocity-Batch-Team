@@ -1,5 +1,6 @@
 package insights_app.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,7 @@ public class Participant {
 
     private String participantRole;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "meeting_id", nullable = false)
     private Meeting meeting;

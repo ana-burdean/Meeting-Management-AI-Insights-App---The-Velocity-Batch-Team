@@ -82,8 +82,21 @@ public class OllamaService {
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString());
 
+        // Log the full response to see what Ollama returns
+        System.out.println("=== OLLAMA RAW RESPONSE ===");
+        System.out.println(response.body());
+        System.out.println("===========================");
+
         JsonNode root = objectMapper.readTree(response.body());
-        return root.get("response").asText();
+
+        // Check which field contains the response
+        if (root.has("response")) {
+            return root.get("response").asText();
+        } else if (root.has("message")) {
+            return root.get("message").get("content").asText();
+        } else {
+            throw new RuntimeException("Unexpected Ollama response structure: " + response.body());
+        }
     }
 
     private String extractJson(String raw) {
