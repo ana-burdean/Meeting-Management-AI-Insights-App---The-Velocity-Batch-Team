@@ -64,4 +64,14 @@ public class MeetingController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/{id}/process")
+    public ResponseEntity<?> processMeeting(@PathVariable Long id) {
+        try {
+            Meeting meeting = meetingService.processMeeting(id);
+            return ResponseEntity.ok(meeting);
+        } catch (RuntimeException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
 }
