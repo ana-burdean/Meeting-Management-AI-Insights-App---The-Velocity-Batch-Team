@@ -37,30 +37,31 @@ public class OllamaService {
 
     private String buildPrompt(String transcript, String participantsInfo) {
         return """
-                You are an AI meeting assistant. Analyze the following meeting transcript.
-                
-                Participants and their roles:
-                %s
-                
-                Transcript:
-                %s
-                
-                Return ONLY a valid JSON object, no explanation, no markdown, no thinking tags:
+            You are an AI meeting assistant. Analyze the following meeting transcript.
+            
+            Participants and their roles:
+            %s
+            
+            Transcript:
+            %s
+            
+            Return ONLY a valid JSON object. All fields must be strings, not arrays.
+            No explanation, no markdown, no thinking tags, just the JSON:
+            {
+              "summary": "brief summary of the meeting as a single string",
+              "detailedNotes": "detailed notes as a single string",
+              "decisionsMade": "all decisions as a single string separated by commas",
+              "followUpNotes": "all follow up notes as a single string",
+              "actionItems": [
                 {
-                  "summary": "brief summary of the meeting",
-                  "detailedNotes": "detailed notes from the meeting",
-                  "decisionsMade": "decisions made during the meeting",
-                  "followUpNotes": "follow up notes",
-                  "actionItems": [
-                    {
-                      "description": "task description",
-                      "deadline": "YYYY-MM-DD or null",
-                      "status": "OPEN",
-                      "assigneeName": "name of the participant"
-                    }
-                  ]
+                  "description": "task description",
+                  "deadline": "YYYY-MM-DD or null",
+                  "status": "OPEN",
+                  "assigneeName": "name of the participant or null"
                 }
-                """.formatted(participantsInfo, transcript);
+              ]
+            }
+            """.formatted(participantsInfo, transcript);
     }
 
     private String callOllama(String prompt) throws Exception {
