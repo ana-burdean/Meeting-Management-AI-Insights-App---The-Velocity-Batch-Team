@@ -83,7 +83,7 @@ public class OllamaService {
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString());
 
-        // Log the full response to see what Ollama returns
+
         System.out.println("=== OLLAMA RAW RESPONSE ===");
         System.out.println(response.body());
         System.out.println("===========================");
@@ -101,10 +101,9 @@ public class OllamaService {
     }
 
     private String extractJson(String raw) {
-        // Strip <think>...</think> blocks if present
         String cleaned = raw.replaceAll("(?s)<think>.*?</think>", "").trim();
 
-        // Extract JSON object
+
         int start = cleaned.indexOf("{");
         int end = cleaned.lastIndexOf("}");
         if (start != -1 && end != -1) {
