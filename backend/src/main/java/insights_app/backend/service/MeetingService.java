@@ -58,7 +58,7 @@ public class MeetingService {
     public Meeting createMeeting(Meeting meeting) {
         meeting.setUploadDate(LocalDateTime.now());
 
-        // Extract participants before saving to avoid cascade null issue
+        // Extract participants before saving to avoid null issue
         List<Participant> participants = meeting.getParticipants();
         meeting.setParticipants(null);
         meeting.setActionItems(null);
@@ -74,7 +74,6 @@ public class MeetingService {
             }
             savedMeeting.setParticipants(participants);
         }
-
         return savedMeeting;
     }
 
