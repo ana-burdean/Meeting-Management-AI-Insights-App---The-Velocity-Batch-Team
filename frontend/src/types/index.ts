@@ -10,39 +10,45 @@ export interface AppUser {
 }
 
 export interface Participant {
-  id: number;
+  id?: number;
   name: string;
-  email?: string;          
+  email?: string;
   participantRole?: string;
-  meeting?: Meeting | number; 
+  meeting?: { id: number };
 }
 
 export interface ActionItem {
   id: number;
   description: string;
-  deadline?: string;   
+  deadline?: string;
   status: TaskStatus;
-  assignee?: Participant;
-  meeting?: Meeting | number; 
+  assignee?: Participant | null;
+  meeting?: { id: number };
 }
 
 export interface Meeting {
   id: number;
   title: string;
-  description?: string;        
-  meetingDate: string;         
-  uploadDate: string;          
-  processingStatus: ProcessingStatus; 
+  description?: string;
+  meetingDate?: string;
+  uploadDate?: string;
+  processingStatus: ProcessingStatus;
   rawTranscript?: string;
-  
-  // AI Generated Results
   summary?: string;
-  detailedNotes?: string;      
-  decisionsMade?: string;      
-  followUpNotes?: string;      
-  
-  // Relationships
+  detailedNotes?: string;
+  decisionsMade?: string;
+  followUpNotes?: string;
   uploader?: AppUser;
-  participants: Participant[];
-  actionItems: ActionItem[];
+  participants?: Participant[];
+  actionItems?: ActionItem[];
+}
+
+export interface MeetingPayload {
+  title: string;
+  description?: string;
+  meetingDate?: string;
+  rawTranscript?: string;
+  processingStatus?: ProcessingStatus;
+  uploader: { id: number };
+  participants?: Participant[];
 }

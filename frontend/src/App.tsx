@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainLayout from './components/templates/MainLayout';
-import MeetingList from './pages/MeetingList';
 import ActionItems from './pages/ActionItems';
+import MeetingList from './pages/MeetingList';
 
 function App() {
   return (
