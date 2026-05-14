@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/action-items")
+@CrossOrigin(origins = "*")
 public class ActionItemController {
 
     private final ActionItemService actionItemService;
