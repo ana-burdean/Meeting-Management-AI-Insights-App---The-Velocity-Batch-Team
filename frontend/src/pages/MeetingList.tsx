@@ -104,33 +104,31 @@ export default function MeetingList() {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-[2rem] bg-[#373D20] p-6 text-[#EFF1ED] shadow-xl">
-        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-black">Meeting Management</h2>
-            <p className="mt-2 max-w-2xl text-sm text-[#EFF1ED]/80">
-              Create meetings, add transcripts, trigger AI processing, and review generated results.
-            </p>
-          </div>
-
-          <Button
-            variant="accent"
-            onClick={() => setIsModalOpen(true)}
-            className="px-5 py-3 shadow-lg"
-          >
-            + Add Meeting
-          </Button>
-        </div>
+      <section className="rounded-[2rem] bg-[#373D20] px-8 py-10 text-center text-[#EFF1ED] shadow-xl">
+        <h2 className="text-3xl font-black">Meeting Management</h2>
+        <p className="mt-3 text-sm text-[#EFF1ED]/80">
+          Create meetings, add transcripts, trigger AI processing, and review generated results.
+        </p>
       </section>
 
-      <MeetingFilters
-        search={search}
-        statusFilter={statusFilter}
-        sortBy={sortBy}
-        onSearchChange={setSearch}
-        onStatusChange={setStatusFilter}
-        onSortChange={setSortBy}
-      />
+      <section className="grid gap-4 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-[#BCBD8B]/50 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
+        <MeetingFilters
+          search={search}
+          statusFilter={statusFilter}
+          sortBy={sortBy}
+          onSearchChange={setSearch}
+          onStatusChange={setStatusFilter}
+          onSortChange={setSortBy}
+        />
+
+        <Button
+          variant="accent"
+          onClick={() => setIsModalOpen(true)}
+          className="h-[54px] whitespace-nowrap px-6 py-3 shadow-lg"
+        >
+          + Add Meeting
+        </Button>
+      </section>
 
       <ErrorMessage message={error} />
       {loading && <Loader text="Loading meetings..." />}

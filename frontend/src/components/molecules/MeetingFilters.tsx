@@ -31,7 +31,7 @@ export default function MeetingFilters({
   onSortChange,
 }: MeetingFiltersProps) {
   return (
-    <section className="grid gap-4 rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-[#BCBD8B]/50 md:grid-cols-3">
+    <div className="grid gap-4 lg:col-span-3 lg:grid-cols-3">
       <Field
         label="Search"
         value={search}
@@ -84,6 +84,6 @@ export default function MeetingFilters({
           />
         </div>
       </Field>
-    </section>
+    </div>
   );
 }
