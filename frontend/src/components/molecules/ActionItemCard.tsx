@@ -10,7 +10,7 @@ interface ActionItemCardProps {
   onDelete: (id: number) => Promise<void>;
 }
 
-const STATUSES: TaskStatus[] = ['OPEN', 'IN_PROGRESS', 'DONE', 'UNKNOWN'];
+const STATUSES: TaskStatus[] = ['OPEN', 'IN PROGRESS', 'DONE', 'UNKNOWN'];
 
 function isOverdue(item: ActionItem) {
   if (!item.deadline || item.status === 'DONE') return false;

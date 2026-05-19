@@ -48,4 +48,11 @@ public class AppUserController {
         appUserService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<AppUser> getUserByUsername(@PathVariable String username) {
+        return appUserService.getUserByUsername(username)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

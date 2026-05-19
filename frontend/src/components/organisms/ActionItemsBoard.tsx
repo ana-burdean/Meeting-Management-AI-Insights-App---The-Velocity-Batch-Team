@@ -8,7 +8,7 @@ interface ActionItemsBoardProps {
   onDelete: (id: number) => Promise<void>;
 }
 
-const GROUPS: TaskStatus[] = ['OPEN', 'IN_PROGRESS', 'DONE', 'UNKNOWN'];
+const GROUPS: TaskStatus[] = ['OPEN', 'IN PROGRESS', 'DONE', 'UNKNOWN'];
 
 export default function ActionItemsBoard({ items, onSave, onToggleDone, onDelete }: ActionItemsBoardProps) {
   const groupedItems = GROUPS.map((status) => ({
