@@ -1,5 +1,5 @@
 export type Role = 'ADMIN' | 'USER';
-export type TaskStatus = 'OPEN' | 'IN_PROGRESS' | 'DONE' | 'UNKNOWN';
+export type TaskStatus = 'OPEN' | 'IN PROGRESS' | 'DONE' | 'UNKNOWN';
 export type ProcessingStatus = 'IDLE' | 'PROCESSING' | 'COMPLETED' | 'FAILED';
 
 export interface AppUser {
