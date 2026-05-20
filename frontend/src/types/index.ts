@@ -23,7 +23,7 @@ export interface ActionItem {
   deadline?: string;
   status: TaskStatus;
   assignee?: Participant | null;
-  meeting?: { id: number };
+  meeting?: { id: number; title?: string };
 }
 
 export interface Meeting {
