@@ -1,6 +1,6 @@
 package insights_app.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import insights_app.backend.enums.TaskStatus;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -22,13 +22,16 @@ public class ActionItem {
     @Column(nullable = false)
     private TaskStatus status;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "meeting_id", nullable = false)
+    @JsonIgnoreProperties({"participants", "actionItems", "rawTranscript", "summary",
+            "detailedNotes", "decisionsMade", "followUpNotes", "uploader",
+            "meetingDate", "uploadDate", "processingStatus", "description"})
     private Meeting meeting;
 
     @ManyToOne
     @JoinColumn(name = "participant_id")
+    @JsonIgnoreProperties({"meeting"})
     private Participant assignee;
 
     public Long getId() { return id; }
