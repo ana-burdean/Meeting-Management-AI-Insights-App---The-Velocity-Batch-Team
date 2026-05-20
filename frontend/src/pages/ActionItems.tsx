@@ -90,7 +90,7 @@ export default function ActionItems() {
     return (
         <div className="space-y-8">
             <section className="rounded-[2rem] bg-[#373D20] px-8 py-10 text-center text-[#EFF1ED] shadow-xl">
-                <h2 className="text-3xl font-black">Action Items / To-Dos</h2>
+                <h2 className="text-3xl font-black">To-Do's</h2>
                 <p className="mt-3 text-sm text-[#EFF1ED]/80">
                     Review, filter, edit, complete, and delete extracted meeting tasks.
                 </p>
