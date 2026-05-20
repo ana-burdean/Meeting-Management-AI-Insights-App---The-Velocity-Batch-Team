@@ -45,8 +45,10 @@ public class ActionItemService {
             item.setDescription(updatedItem.getDescription());
             item.setDeadline(updatedItem.getDeadline());
             item.setStatus(updatedItem.getStatus());
-            item.setAssignee(updatedItem.getAssignee());
-            item.setMeeting(updatedItem.getMeeting());
+            // Only update assignee if provided; leave meeting untouched (it's @JsonIgnore and must not change)
+                if (updatedItem.getAssignee() != null) {
+                    item.setAssignee(updatedItem.getAssignee());
+            }
             return actionItemRepository.save(item);
         }).orElseThrow(() -> new RuntimeException("ActionItem not found with id: " + id));
     }

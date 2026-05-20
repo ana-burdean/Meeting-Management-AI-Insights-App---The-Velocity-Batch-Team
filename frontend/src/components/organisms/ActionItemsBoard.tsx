@@ -1,4 +1,5 @@
 import type { ActionItem, TaskStatus } from '../../types';
+import { TASK_STATUS_LABELS } from '../../types';
 import ActionItemCard from '../molecules/ActionItemCard';
 
 interface ActionItemsBoardProps {
@@ -8,7 +9,7 @@ interface ActionItemsBoardProps {
   onDelete: (id: number) => Promise<void>;
 }
 
-const GROUPS: TaskStatus[] = ['OPEN', 'IN PROGRESS', 'DONE', 'UNKNOWN'];
+const GROUPS: TaskStatus[] = ['OPEN', 'IN_PROGRESS', 'DONE', 'UNKNOWN'];
 
 export default function ActionItemsBoard({ items, onSave, onToggleDone, onDelete }: ActionItemsBoardProps) {
   const groupedItems = GROUPS.map((status) => ({
@@ -21,7 +22,7 @@ export default function ActionItemsBoard({ items, onSave, onToggleDone, onDelete
       {groupedItems.map((group) => (
         <div key={group.status} className="rounded-[2rem] bg-white p-4 shadow-sm ring-1 ring-[#BCBD8B]/50">
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="font-black">{group.status}</h3>
+            <h3 className="font-black">{TASK_STATUS_LABELS[group.status]}</h3>
             <span className="rounded-full bg-[#EFF1ED] px-3 py-1 text-xs font-black text-[#717744]">
               {group.items.length}
             </span>

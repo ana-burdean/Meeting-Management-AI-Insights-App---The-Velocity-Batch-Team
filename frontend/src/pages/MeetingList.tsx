@@ -7,10 +7,11 @@ import MeetingFilters from '../components/molecules/MeetingFilters';
 import AddMeetingForm from '../components/organisms/AddMeetingForm';
 import MeetingDetailsPanel from '../components/organisms/MeetingDetailsPanel';
 import { api } from '../services/api';
-import type { Meeting, MeetingPayload, ProcessingStatus } from '../types';
+import type { AppUser, Meeting, MeetingPayload, ProcessingStatus } from '../types';
 
 export default function MeetingList() {
   const [meetings, setMeetings] = useState<Meeting[]>([]);
+  const [users, setUsers] = useState<AppUser[]>([]);
   const [selectedMeeting, setSelectedMeeting] = useState<Meeting | null>(null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'ALL' | ProcessingStatus>('ALL');
@@ -33,8 +34,18 @@ export default function MeetingList() {
     }
   }
 
+  async function loadUsers() {
+    try {
+      const data = await api.users.getAll();
+      setUsers(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not load users.');
+    }
+  }
+
   useEffect(() => {
     void loadMeetings();
+    void loadUsers();
   }, []);
 
   const filteredMeetings = useMemo(() => {
@@ -161,6 +172,7 @@ export default function MeetingList() {
       {isModalOpen && (
         <AddMeetingForm
           loading={loading}
+          users={users}
           onClose={() => setIsModalOpen(false)}
           onSubmit={handleCreateMeeting}
         />
