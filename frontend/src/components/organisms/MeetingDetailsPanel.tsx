@@ -24,7 +24,12 @@ export default function MeetingDetailsPanel({
     if (!selectedMeeting) return null;
 
     return (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-[#373D20]/65 p-4 backdrop-blur-sm">
+        <div
+            className="fixed inset-0 z-50 grid place-items-center bg-[#373D20]/65 p-4 backdrop-blur-sm"
+            onMouseDown={(e) => {
+                if (e.target === e.currentTarget) onClose();
+            }}
+        >
             <aside className="flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-[2rem] bg-white shadow-2xl ring-1 ring-[#BCBD8B]/50">
 
                 {/* Sticky header */}
@@ -52,12 +57,11 @@ export default function MeetingDetailsPanel({
                 </div>
 
                 {/* Scrollable body */}
-                <div className="overflow-y-auto px-6 py-6">
+                <div className="overflow-y-auto px-6 py-6 pb-10">
                     <div className="space-y-6">
 
                         <section>
                             <h4 className="font-black">Attendees</h4>
-
                             <div className="mt-2 rounded-2xl bg-[#EFF1ED] p-4">
                                 {selectedMeeting.participants && selectedMeeting.participants.length > 0 ? (
                                     <ul className="grid gap-2 sm:grid-cols-2">
@@ -120,8 +124,10 @@ export default function MeetingDetailsPanel({
                                 <p className="mt-2 text-sm">{selectedMeeting.followUpNotes || 'No follow-up notes yet.'}</p>
                             </div>
                         </section>
+
                     </div>
                 </div>
+
             </aside>
         </div>
     );

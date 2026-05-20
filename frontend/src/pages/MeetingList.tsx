@@ -8,11 +8,10 @@ import MeetingFilters from '../components/molecules/MeetingFilters';
 import AddMeetingForm from '../components/organisms/AddMeetingForm';
 import MeetingDetailsPanel from '../components/organisms/MeetingDetailsPanel';
 import { api } from '../services/api';
-import type { AppUser, Meeting, MeetingPayload, ProcessingStatus } from '../types';
+import type { Meeting, MeetingPayload, ProcessingStatus } from '../types';
 
 export default function MeetingList() {
     const [meetings, setMeetings] = useState<Meeting[]>([]);
-    const [users, setUsers] = useState<AppUser[]>([]);
     const [selectedMeeting, setSelectedMeeting] = useState<Meeting | null>(null);
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState<'ALL' | ProcessingStatus>('ALL');
@@ -36,18 +35,8 @@ export default function MeetingList() {
         }
     }
 
-    async function loadUsers() {
-        try {
-            const data = await api.users.getAll();
-            setUsers(data);
-        } catch (err) {
-            setError(err instanceof Error ? err.message : 'Could not load users.');
-        }
-    }
-
     useEffect(() => {
         void loadMeetings();
-        void loadUsers();
     }, []);
 
     const filteredMeetings = useMemo(() => {
@@ -56,15 +45,12 @@ export default function MeetingList() {
                 const text = `${meeting.title} ${meeting.description ?? ''} ${meeting.rawTranscript ?? ''}`.toLowerCase();
                 const matchesSearch = text.includes(search.toLowerCase());
                 const matchesStatus = statusFilter === 'ALL' || meeting.processingStatus === statusFilter;
-
                 return matchesSearch && matchesStatus;
             })
             .sort((a, b) => {
                 if (sortBy === 'title-asc') return a.title.localeCompare(b.title);
-
                 const dateA = a.meetingDate ? new Date(a.meetingDate).getTime() : 0;
                 const dateB = b.meetingDate ? new Date(b.meetingDate).getTime() : 0;
-
                 return sortBy === 'date-asc' ? dateA - dateB : dateB - dateA;
             });
     }, [meetings, search, statusFilter, sortBy]);
@@ -104,12 +90,10 @@ export default function MeetingList() {
             setError('Transcript is empty. Add transcript text before processing.');
             return;
         }
-
         try {
             setProcessingId(meeting.id);
             setError('');
             const updated = await api.meetings.process(meeting.id);
-
             setMeetings((current) => current.map((item) => (item.id === updated.id ? updated : item)));
             setSelectedMeeting(updated);
         } catch (err) {
@@ -137,7 +121,6 @@ export default function MeetingList() {
                     onStatusChange={setStatusFilter}
                     onSortChange={setSortBy}
                 />
-
                 <Button
                     variant="accent"
                     onClick={() => setIsModalOpen(true)}
@@ -159,7 +142,6 @@ export default function MeetingList() {
                         onClick={() => setSelectedMeeting(meeting)}
                     />
                 ))}
-
                 {!loading && filteredMeetings.length === 0 && (
                     <div className="col-span-full rounded-[1.7rem] bg-white p-8 text-center text-[#766153] ring-1 ring-[#BCBD8B]/50">
                         No meetings found.
@@ -205,7 +187,6 @@ export default function MeetingList() {
             {isModalOpen && (
                 <AddMeetingForm
                     loading={loading}
-                    users={users}
                     onClose={() => setIsModalOpen(false)}
                     onSubmit={handleCreateMeeting}
                 />

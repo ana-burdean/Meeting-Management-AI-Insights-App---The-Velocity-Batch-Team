@@ -6,17 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f21bd2a0-c799-4440-8df1-f9173124d1c3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src (2).zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/atoms/Badge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/atoms/Badge.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/atoms/Modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/atoms/Modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/molecules/MeetingCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/molecules/MeetingCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/organisms/AddMeetingForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/organisms/AddMeetingForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/organisms/MeetingDetailsPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/organisms/MeetingDetailsPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/templates/MainLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/templates/MainLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ActionItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ActionItems.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/MeetingList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/MeetingList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,30 +27,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.BackendApplication.executor": "Run",
-    "git-widget-placeholder": "backend__ib",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "D:\\Meeting-Management-AI-Insights-App---The-Velocity-Batch-Team\\frontend\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.file-colors",
-    "ts.external.directory.path": "D:\\Meeting-Management-AI-Insights-App---The-Velocity-Batch-Team\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;backend__ib&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;D:\\Meeting-Management-AI-Insights-App---The-Velocity-Batch-Team\\frontend\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.file-colors&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Meeting-Management-AI-Insights-App---The-Velocity-Batch-Team\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" value="local" />
@@ -99,7 +91,8 @@
       <workItem from="1779109418862" duration="2527000" />
       <workItem from="1779230775614" duration="1643000" />
       <workItem from="1779232785326" duration="25000" />
-      <workItem from="1779275775504" duration="5737000" />
+      <workItem from="1779275775504" duration="6807000" />
+      <workItem from="1779295803632" duration="2179000" />
     </task>
     <servers />
   </component>
