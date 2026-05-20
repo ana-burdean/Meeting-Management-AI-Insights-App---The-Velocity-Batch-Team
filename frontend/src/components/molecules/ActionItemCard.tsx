@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ActionItem, TaskStatus } from '../../types';
+import { TASK_STATUS_LABELS } from '../../types';
 import Badge from "../atoms/Badge";
 import Button from "../atoms/Button";
 
@@ -10,7 +11,7 @@ interface ActionItemCardProps {
   onDelete: (id: number) => Promise<void>;
 }
 
-const STATUSES: TaskStatus[] = ['OPEN', 'IN PROGRESS', 'DONE', 'UNKNOWN'];
+const STATUSES: TaskStatus[] = ['OPEN', 'IN_PROGRESS', 'DONE', 'UNKNOWN'];
 
 function isOverdue(item: ActionItem) {
   if (!item.deadline || item.status === 'DONE') return false;
@@ -44,13 +45,14 @@ export default function ActionItemCard({ item, onSave, onToggleDone, onDelete }:
           />
 
           <select
+            title="Status"
             value={draft.status ?? item.status}
             onChange={(event) => setDraft((current) => ({ ...current, status: event.target.value as TaskStatus }))}
             className="w-full rounded-xl border border-[#BCBD8B] bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#717744]"
           >
             {STATUSES.map((status) => (
               <option key={status} value={status}>
-                {status}
+                {TASK_STATUS_LABELS[status]}
               </option>
             ))}
           </select>

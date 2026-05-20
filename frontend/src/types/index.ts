@@ -1,5 +1,5 @@
 export type Role = 'ADMIN' | 'USER';
-export type TaskStatus = 'OPEN' | 'IN PROGRESS' | 'DONE' | 'UNKNOWN';
+export type TaskStatus = 'OPEN' | 'IN_PROGRESS' | 'DONE' | 'UNKNOWN';
 export type ProcessingStatus = 'IDLE' | 'PROCESSING' | 'COMPLETED' | 'FAILED';
 
 export interface AppUser {
@@ -52,3 +52,10 @@ export interface MeetingPayload {
   uploader: { id: number };
   participants?: Participant[];
 }
+
+export const TASK_STATUS_LABELS: Record<TaskStatus, string> = {
+  OPEN: 'Open',
+  IN_PROGRESS: 'In Progress',
+  DONE: 'Done',
+  UNKNOWN: 'Unknown',
+};

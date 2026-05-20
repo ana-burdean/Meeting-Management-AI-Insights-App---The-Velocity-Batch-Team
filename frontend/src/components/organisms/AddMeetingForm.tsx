@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { MeetingPayload, Participant } from '../../types';
+import type { AppUser, MeetingPayload, Participant } from '../../types';
 import Button from "../atoms/Button";
 import ErrorMessage from "../atoms/ErrorMessage";
 import Field from "../atoms/Field";
@@ -15,6 +15,7 @@ const emptyForm = {
 
 interface AddMeetingFormProps {
   loading: boolean;
+  users: AppUser[];
   onClose: () => void;
   onSubmit: (payload: MeetingPayload) => Promise<void>;
 }
@@ -36,8 +37,9 @@ function parseParticipants(text: string): Participant[] {
     .filter((participant) => participant.name.length > 0);
 }
 
-export default function AddMeetingForm({ loading, onClose, onSubmit }: AddMeetingFormProps) {
+export default function AddMeetingForm({ loading, users, onClose, onSubmit }: AddMeetingFormProps) {
   const [form, setForm] = useState(emptyForm);
+  const [uploaderId, setUploaderId] = useState<number | ''>('');
   const [formError, setFormError] = useState('');
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -54,17 +56,23 @@ export default function AddMeetingForm({ loading, onClose, onSubmit }: AddMeetin
       return;
     }
 
+    if (!uploaderId) {
+      setFormError('Please select who is uploading this meeting.');
+      return;
+    }
+
     await onSubmit({
       title: form.title.trim(),
       description: form.description.trim(),
       meetingDate: form.meetingDate,
       rawTranscript: form.rawTranscript.trim(),
       processingStatus: 'IDLE',
-      uploader: { id: 1 },
+      uploader: { id: uploaderId as number },
       participants: parseParticipants(form.participantsText),
     });
 
     setForm(emptyForm);
+    setUploaderId('');
   }
 
   return (
@@ -85,6 +93,21 @@ export default function AddMeetingForm({ loading, onClose, onSubmit }: AddMeetin
             value={form.meetingDate}
             onChange={(event) => setForm((current) => ({ ...current, meetingDate: event.target.value }))}
           />
+
+          <Field label="Uploaded by *">
+            <select
+              value={uploaderId}
+              onChange={(event) => setUploaderId(Number(event.target.value))}
+              className="w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744]"
+            >
+              <option value="">— Select user —</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.username}
+                </option>
+              ))}
+            </select>
+          </Field>
 
           <Field label="Description">
             <textarea

@@ -6,11 +6,12 @@ import Loader from '../components/atoms/Loader';
 import ActionItemsBoard from '../components/organisms/ActionItemsBoard';
 import { api } from '../services/api';
 import type { ActionItem, TaskStatus } from '../types';
+import { TASK_STATUS_LABELS } from '../types';
 
 const STATUS_OPTIONS: Array<'ALL' | TaskStatus> = [
   'ALL',
   'OPEN',
-  'IN PROGRESS',
+  'IN_PROGRESS',
   'DONE',
   'UNKNOWN',
 ];
@@ -68,7 +69,6 @@ export default function ActionItems() {
 
     try {
       const updated = await api.actionItems.update(item.id, {
-        ...item,
         description: draft.description,
         deadline: draft.deadline,
         status: draft.status ?? item.status,
@@ -96,7 +96,6 @@ export default function ActionItems() {
 
     try {
       const updated = await api.actionItems.update(item.id, {
-        ...item,
         status: nextStatus,
       });
 
@@ -152,6 +151,7 @@ export default function ActionItems() {
         <Field label="Filter by status">
           <div className="relative">
             <select
+              title="Filter by status"
               value={statusFilter}
               onChange={(event) =>
                 setStatusFilter(
@@ -162,7 +162,7 @@ export default function ActionItems() {
             >
               {STATUS_OPTIONS.map((status) => (
                 <option key={status} value={status}>
-                  {status}
+                  {status === 'ALL' ? 'All' : TASK_STATUS_LABELS[status]}
                 </option>
               ))}
             </select>
