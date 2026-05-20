@@ -22,10 +22,11 @@ async function apiFetch<T>(endpoint: string, options: RequestInit = {}): Promise
 }
 
 export const api = {
-  users: {
-    getAll: () => apiFetch<AppUser[]>('/users'),
-    create: (user: Omit<AppUser, 'id'>) => apiFetch<AppUser>('/users', { method: 'POST', body: JSON.stringify(user) }),
-  },
+    users: {
+        getAll: () => apiFetch<AppUser[]>('/users'),
+        getByUsername: (username: string) => apiFetch<AppUser>(`/users/username/${username}`),
+        create: (user: Omit<AppUser, 'id'>) => apiFetch<AppUser>('/users', { method: 'POST', body: JSON.stringify(user) }),
+    },
   meetings: {
     getAll: () => apiFetch<Meeting[]>('/meetings'),
     getById: (id: number) => apiFetch<Meeting>(`/meetings/${id}`),
