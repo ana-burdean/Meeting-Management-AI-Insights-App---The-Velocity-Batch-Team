@@ -27,12 +27,7 @@ function parseParticipants(text: string): Participant[] {
     .filter(Boolean)
     .map((line) => {
       const [name = '', email = '', participantRole = ''] = line.split(',').map((item) => item.trim());
-
-      return {
-        name,
-        email,
-        participantRole,
-      };
+      return { name, email, participantRole };
     })
     .filter((participant) => participant.name.length > 0);
 }
@@ -41,23 +36,28 @@ export default function AddMeetingForm({ loading, users, onClose, onSubmit }: Ad
   const [form, setForm] = useState(emptyForm);
   const [uploaderId, setUploaderId] = useState<number | ''>('');
   const [formError, setFormError] = useState('');
+  const [attempted, setAttempted] = useState(false);
+
+  const missingTitle = !form.title.trim();
+  const missingDate = !form.meetingDate;
+  const missingUser = !uploaderId;
+  const canSave = !missingTitle && !missingDate && !missingUser;
+
+  // Build tooltip text for what's missing
+  const missingItems = [
+    missingTitle && 'Title',
+    missingDate && 'Date and time',
+    missingUser && 'Uploaded by',
+  ].filter(Boolean);
+  const saveTooltip = canSave ? undefined : `Required: ${missingItems.join(', ')}`;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setAttempted(true);
     setFormError('');
 
-    if (!form.title.trim()) {
-      setFormError('Title is required.');
-      return;
-    }
-
-    if (!form.meetingDate) {
-      setFormError('Meeting date is required.');
-      return;
-    }
-
-    if (!uploaderId) {
-      setFormError('Please select who is uploading this meeting.');
+    if (!canSave) {
+      setFormError(`Please fill in: ${missingItems.join(', ')}.`);
       return;
     }
 
@@ -73,7 +73,11 @@ export default function AddMeetingForm({ loading, users, onClose, onSubmit }: Ad
 
     setForm(emptyForm);
     setUploaderId('');
+    setAttempted(false);
   }
+
+  const fieldError = (missing: boolean) =>
+    attempted && missing ? 'border-red-400 ring-1 ring-red-300' : '';
 
   return (
     <Modal title="Add Meeting" subtitle="Fields marked with * are required." onClose={onClose}>
@@ -81,24 +85,29 @@ export default function AddMeetingForm({ loading, users, onClose, onSubmit }: Ad
         <ErrorMessage message={formError} />
 
         <div className="mt-4 grid gap-4">
-          <Field
-            label="Title *"
-            value={form.title}
-            onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
-          />
+          <Field label="Title *">
+            <input
+              value={form.title}
+              onChange={(e) => setForm((c) => ({ ...c, title: e.target.value }))}
+              className={`w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744] ${fieldError(missingTitle)}`}
+            />
+          </Field>
 
-          <Field
-            label="Date and time *"
-            type="datetime-local"
-            value={form.meetingDate}
-            onChange={(event) => setForm((current) => ({ ...current, meetingDate: event.target.value }))}
-          />
+          <Field label="Date and time *">
+            <input
+              type="datetime-local"
+              value={form.meetingDate}
+              onChange={(e) => setForm((c) => ({ ...c, meetingDate: e.target.value }))}
+              className={`w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744] ${fieldError(missingDate)}`}
+            />
+          </Field>
 
           <Field label="Uploaded by *">
             <select
+              title="Uploaded by"
               value={uploaderId}
-              onChange={(event) => setUploaderId(Number(event.target.value))}
-              className="w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744]"
+              onChange={(e) => setUploaderId(Number(e.target.value))}
+              className={`w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744] ${fieldError(missingUser)}`}
             >
               <option value="">— Select user —</option>
               {users.map((user) => (
@@ -113,7 +122,7 @@ export default function AddMeetingForm({ loading, users, onClose, onSubmit }: Ad
             <textarea
               rows={3}
               value={form.description}
-              onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
+              onChange={(e) => setForm((c) => ({ ...c, description: e.target.value }))}
               className="w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744]"
             />
           </Field>
@@ -122,7 +131,7 @@ export default function AddMeetingForm({ loading, users, onClose, onSubmit }: Ad
             <textarea
               rows={6}
               value={form.rawTranscript}
-              onChange={(event) => setForm((current) => ({ ...current, rawTranscript: event.target.value }))}
+              onChange={(e) => setForm((c) => ({ ...c, rawTranscript: e.target.value }))}
               placeholder="Paste meeting transcript here..."
               className="w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744]"
             />
@@ -132,7 +141,7 @@ export default function AddMeetingForm({ loading, users, onClose, onSubmit }: Ad
             <textarea
               rows={4}
               value={form.participantsText}
-              onChange={(event) => setForm((current) => ({ ...current, participantsText: event.target.value }))}
+              onChange={(e) => setForm((c) => ({ ...c, participantsText: e.target.value }))}
               placeholder={'One per line: Name, email, role\nExample: Ana Popescu, ana@email.com, Project Manager'}
               className="w-full rounded-2xl border border-[#BCBD8B] bg-[#EFF1ED] px-4 py-3 outline-none focus:ring-2 focus:ring-[#717744]"
             />
@@ -143,9 +152,17 @@ export default function AddMeetingForm({ loading, users, onClose, onSubmit }: Ad
           <Button type="button" variant="secondary" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" disabled={loading}>
-            {loading ? 'Saving...' : 'Save Meeting'}
-          </Button>
+
+          {/* Wrapper span needed so title shows even when button is disabled */}
+          <span title={saveTooltip} className="inline-block">
+            <Button
+              type="submit"
+              disabled={loading}
+              className={!canSave ? '!bg-gray-300 !text-gray-500 cursor-not-allowed' : ''}
+            >
+              {loading ? 'Saving...' : !canSave ? '⚠ Save Meeting' : 'Save Meeting'}
+            </Button>
+          </span>
         </div>
       </form>
     </Modal>

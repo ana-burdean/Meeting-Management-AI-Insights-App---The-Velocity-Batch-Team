@@ -1,5 +1,4 @@
-import type { Meeting } from '../../types';
-import Badge from "../atoms/Badge";
+import type { Meeting, ProcessingStatus } from '../../types';
 
 interface MeetingCardProps {
     meeting: Meeting;
@@ -12,7 +11,16 @@ function formatDate(date?: string) {
     return new Date(date).toLocaleString();
 }
 
+const STATUS_DOT: Record<ProcessingStatus, { color: string; title: string }> = {
+    COMPLETED: { color: 'bg-green-500',  title: 'Completed' },
+    FAILED:    { color: 'bg-red-500',    title: 'Failed' },
+    PROCESSING:{ color: 'bg-orange-400 animate-pulse', title: 'Processing' },
+    IDLE:      { color: 'bg-orange-300', title: 'Idle' },
+};
+
 export default function MeetingCard({ meeting, isSelected, onClick }: MeetingCardProps) {
+    const dot = STATUS_DOT[meeting.processingStatus] ?? { color: 'bg-gray-400', title: meeting.processingStatus };
+
     return (
         <article
             className={`cursor-pointer rounded-[1.7rem] bg-white p-5 shadow-sm ring-1 transition hover:-translate-y-0.5 hover:shadow-md ${
@@ -29,7 +37,7 @@ export default function MeetingCard({ meeting, isSelected, onClick }: MeetingCar
                     </p>
                 </div>
 
-                <Badge status={meeting.processingStatus} />
+                <div title={dot.title} className={`mt-1 h-3 w-3 shrink-0 rounded-full ${dot.color}`} />
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2 text-xs font-bold text-[#717744]">
