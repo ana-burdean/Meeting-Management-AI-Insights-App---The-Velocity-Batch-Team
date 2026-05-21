@@ -26,7 +26,6 @@ export default function Login({ onLogin }: LoginProps) {
 
         try {
             if (mode === 'login') {
-                // Try to find existing user by username
                 const user = await api.users.getByUsername(username.trim());
                 if (!user) {
                     setError('User not found. Please sign up first.');
@@ -35,7 +34,6 @@ export default function Login({ onLogin }: LoginProps) {
                 onLogin({ id: user.id, username: user.username });
                 navigate('/meetings');
             } else {
-                // Create new user
                 const existing = await api.users.getByUsername(username.trim()).catch(() => null);
                 if (existing) {
                     setError('Username already taken. Please choose another.');
@@ -57,13 +55,19 @@ export default function Login({ onLogin }: LoginProps) {
     }
 
     return (
-        <div className="min-h-screen bg-[#EFF1ED] flex flex-col items-center justify-center px-4">
+        <div className="relative min-h-screen bg-[#EFF1ED] flex flex-col items-center justify-center px-4">
+
+            {/* Back to home button — top left */}
+            <button
+                onClick={() => navigate('/')}
+                className="absolute left-6 top-6 flex items-center rounded-2xl bg-[#BCBD8B] px-4 py-2 text-[#373D20] shadow-sm transition hover:bg-[#EFF1ED]"
+            >
+                <span className="text-2xl font-black leading-none">←</span>
+            </button>
+
             <div className="w-full max-w-md">
                 <div className="mb-8 text-center">
-                    <h1
-                        className="mb-6 text-lg font-black text-[#373D20] cursor-pointer"
-                        onClick={() => navigate('/')}
-                    >
+                    <h1 className="mb-6 text-lg font-black text-[#373D20]">
                         AutoMinutes
                     </h1>
                     <h2 className="text-3xl font-black text-[#373D20]">
