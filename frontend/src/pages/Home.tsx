@@ -24,7 +24,6 @@ export default function Home() {
     const navigate = useNavigate();
     
     const [displayText, setDisplayText] = useState('');
-    // New state to track if the animation is actively running
     const [isTyping, setIsTyping] = useState(true); 
     
     const fullText = "AutoMinutes automatically transcribes your meetings, extracts key decisions, and creates action items — so your team can focus on what matters.";
@@ -38,7 +37,6 @@ export default function Home() {
                 currentIndex++;
             } else {
                 clearInterval(typingInterval);
-                // Turn off the typing flag when we reach the end
                 setIsTyping(false); 
             }
         }, 30); 
@@ -65,7 +63,6 @@ export default function Home() {
 
                     <p className="mb-10 text-lg text-[#766153] min-h-[84px] sm:min-h-[56px]">
                         {displayText}
-                        {/* The cursor now only renders if isTyping is true */}
                         {isTyping && <span className="animate-pulse font-light">|</span>}
                     </p>
 
@@ -81,7 +78,10 @@ export default function Home() {
 
                 <div className="mt-20 grid gap-6 sm:grid-cols-3 max-w-3xl w-full">
                     {features.map((f) => (
-                        <div key={f.title} className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-[#BCBD8B]/50 text-left">
+                        <div
+                            key={f.title}
+                            className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-[#BCBD8B]/50 text-left transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-default"
+                        >
                             <div className="mb-3 text-3xl h-12 flex items-center justify-start">
                                 {f.icon}
                             </div>
